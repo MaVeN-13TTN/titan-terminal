@@ -1,9 +1,13 @@
+
 import React, { useState, useEffect, useRef } from 'react';
 import { TerminalLine } from './TerminalLine';
 import { CommandHandler } from '../utils/commandHandler';
 import { asciiArt } from '../data/asciiArt';
 import { MatrixRain } from './MatrixRain';
 import { CoffeeAnimation } from './CoffeeAnimation';
+import { TerminalInput } from './TerminalInput';
+import { TerminalHistory } from './TerminalHistory';
+import { TerminalAnimations } from './TerminalAnimations';
 
 export const Terminal = () => {
   const [history, setHistory] = useState<Array<{ type: 'command' | 'output', content: string, timestamp?: string }>>([]);
@@ -80,7 +84,7 @@ export const Terminal = () => {
       const response = await commandHandler.executeCommand(command);
       
       // Check if response is an animation
-      if (typeof response === 'object' && response.type === 'animation') {
+      if (typeof response === 'object' && 'type' in response && response.type === 'animation') {
         setActiveAnimation(response.component);
         setIsTyping(false);
         return;
@@ -95,7 +99,7 @@ export const Terminal = () => {
             }, index * 50);
           });
         } else {
-          setHistory(prev => [...prev, { type: 'output', content: response }]);
+          setHistory(prev => [...prev, { type: 'output', content: response as string }]);
         }
         setIsTyping(false);
       }, 100);
@@ -113,123 +117,37 @@ export const Terminal = () => {
     }
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    switch (e.key) {
-      case 'Enter':
-        e.preventDefault();
-        if (currentInput.trim()) {
-          handleCommand(currentInput);
-        }
-        setCurrentInput('');
-        setHistoryIndex(-1);
-        setSuggestions([]);
-        break;
-        
-      case 'ArrowUp':
-        e.preventDefault();
-        if (commandHistory.length > 0) {
-          const newIndex = Math.min(historyIndex + 1, commandHistory.length - 1);
-          setHistoryIndex(newIndex);
-          setCurrentInput(commandHistory[newIndex] || '');
-        }
-        break;
-        
-      case 'ArrowDown':
-        e.preventDefault();
-        if (historyIndex > 0) {
-          const newIndex = historyIndex - 1;
-          setHistoryIndex(newIndex);
-          setCurrentInput(commandHistory[newIndex] || '');
-        } else if (historyIndex === 0) {
-          setHistoryIndex(-1);
-          setCurrentInput('');
-        }
-        break;
-        
-      case 'Tab':
-        e.preventDefault();
-        if (suggestions.length === 1) {
-          setCurrentInput(suggestions[0]);
-          setSuggestions([]);
-        } else if (suggestions.length > 1) {
-          // Show all suggestions
-          setHistory(prev => [...prev, 
-            { type: 'output', content: suggestions.join('  ') }
-          ]);
-        }
-        break;
-        
-      case 'l':
-        if (e.ctrlKey) {
-          e.preventDefault();
-          setHistory([]);
-        }
-        break;
-    }
-  };
-
   const getCurrentPrompt = () => {
     return 'devsecops@portfolio:~$';
   };
 
   return (
     <div className="h-screen flex flex-col bg-black text-green-400 p-4">
-      {/* Animation overlays */}
-      {activeAnimation === 'matrix' && (
-        <MatrixRain onComplete={handleAnimationComplete} />
-      )}
-      {activeAnimation === 'coffee' && (
-        <CoffeeAnimation onComplete={handleAnimationComplete} />
-      )}
+      <TerminalAnimations 
+        activeAnimation={activeAnimation}
+        onAnimationComplete={handleAnimationComplete}
+      />
 
-      <div 
-        ref={terminalRef}
-        className="flex-1 overflow-y-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-green-600"
-      >
-        <div className="space-y-1">
-          {history.map((entry, index) => (
-            <TerminalLine 
-              key={index}
-              type={entry.type}
-              content={entry.content}
-              prompt={entry.type === 'command' ? getCurrentPrompt() : undefined}
-              timestamp={entry.timestamp}
-            />
-          ))}
-          
-          {isTyping && (
-            <div className="flex items-center">
-              <span className="text-green-500 mr-2">Processing</span>
-              <div className="flex space-x-1">
-                <div className="w-1 h-1 bg-green-400 rounded-full animate-bounce"></div>
-                <div className="w-1 h-1 bg-green-400 rounded-full animate-bounce" style={{animationDelay: '0.1s'}}></div>
-                <div className="w-1 h-1 bg-green-400 rounded-full animate-bounce" style={{animationDelay: '0.2s'}}></div>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
+      <TerminalHistory 
+        history={history}
+        isTyping={isTyping}
+        getCurrentPrompt={getCurrentPrompt}
+        terminalRef={terminalRef}
+      />
       
-      {suggestions.length > 0 && (
-        <div className="text-yellow-400 text-sm mb-2">
-          Suggestions: {suggestions.join('  ')}
-        </div>
-      )}
-      
-      <div className="flex items-center">
-        <span className="text-green-500 mr-2">{getCurrentPrompt()}</span>
-        <input
-          ref={inputRef}
-          type="text"
-          value={currentInput}
-          onChange={(e) => setCurrentInput(e.target.value)}
-          onKeyDown={handleKeyDown}
-          className="flex-1 bg-transparent border-none outline-none text-green-400 font-mono"
-          autoComplete="off"
-          spellCheck="false"
-        />
-        <span className="text-green-400 animate-pulse">█</span>
-      </div>
+      <TerminalInput
+        currentInput={currentInput}
+        setCurrentInput={setCurrentInput}
+        suggestions={suggestions}
+        setSuggestions={setSuggestions}
+        commandHistory={commandHistory}
+        historyIndex={historyIndex}
+        setHistoryIndex={setHistoryIndex}
+        setHistory={setHistory}
+        onCommand={handleCommand}
+        getCurrentPrompt={getCurrentPrompt}
+        inputRef={inputRef}
+      />
       
       <div className="text-xs text-gray-500 mt-2">
         Hint: Use Tab for auto-completion, ↑↓ for history, Ctrl+L to clear
