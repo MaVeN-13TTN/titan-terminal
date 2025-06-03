@@ -1,9 +1,8 @@
-
 import { portfolioData } from '../data/portfolioData';
 import { asciiArt } from '../data/asciiArt';
 
 export class CommandHandler {
-  private commands: { [key: string]: () => string | string[] } = {
+  private commands: { [key: string]: () => string | string[] | { type: 'animation', component: string } } = {
     help: () => this.getHelp(),
     about: () => this.getAbout(),
     skills: () => this.getSkills(),
@@ -40,15 +39,11 @@ export class CommandHandler {
       'Here\'s your sandwich! Extra security layers included.',
       'Ingredients: SSL certificates, encrypted pickles, and hardened bread.'
     ],
-    matrix: () => asciiArt.matrix,
-    coffee: () => [
-      '☕ Brewing coffee...',
-      'Coffee ready! Optimized for late-night deployments.',
-      'Vulnerability scan: No known security issues detected.'
-    ]
+    matrix: () => ({ type: 'animation', component: 'matrix' }),
+    coffee: () => ({ type: 'animation', component: 'coffee' })
   };
 
-  executeCommand(input: string): Promise<string | string[]> {
+  executeCommand(input: string): Promise<string | string[] | { type: 'animation', component: string }> {
     return new Promise((resolve) => {
       const command = input.trim().toLowerCase();
       

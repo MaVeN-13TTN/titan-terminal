@@ -1,8 +1,9 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { TerminalLine } from './TerminalLine';
 import { CommandHandler } from '../utils/commandHandler';
 import { asciiArt } from '../data/asciiArt';
+import { MatrixRain } from './MatrixRain';
+import { CoffeeAnimation } from './CoffeeAnimation';
 
 export const Terminal = () => {
   const [history, setHistory] = useState<Array<{ type: 'command' | 'output', content: string, timestamp?: string }>>([]);
@@ -11,6 +12,7 @@ export const Terminal = () => {
   const [commandHistory, setCommandHistory] = useState<string[]>([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [suggestions, setSuggestions] = useState<string[]>([]);
+  const [activeAnimation, setActiveAnimation] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
   const commandHandler = new CommandHandler();
@@ -77,6 +79,13 @@ export const Terminal = () => {
     try {
       const response = await commandHandler.executeCommand(command);
       
+      // Check if response is an animation
+      if (typeof response === 'object' && response.type === 'animation') {
+        setActiveAnimation(response.component);
+        setIsTyping(false);
+        return;
+      }
+
       // Simulate typing delay for realism
       setTimeout(() => {
         if (Array.isArray(response)) {
@@ -93,6 +102,14 @@ export const Terminal = () => {
     } catch (error) {
       setHistory(prev => [...prev, { type: 'output', content: `Error: ${error}` }]);
       setIsTyping(false);
+    }
+  };
+
+  const handleAnimationComplete = () => {
+    setActiveAnimation(null);
+    // Focus back on input
+    if (inputRef.current) {
+      inputRef.current.focus();
     }
   };
 
@@ -157,6 +174,14 @@ export const Terminal = () => {
 
   return (
     <div className="h-screen flex flex-col bg-black text-green-400 p-4">
+      {/* Animation overlays */}
+      {activeAnimation === 'matrix' && (
+        <MatrixRain onComplete={handleAnimationComplete} />
+      )}
+      {activeAnimation === 'coffee' && (
+        <CoffeeAnimation onComplete={handleAnimationComplete} />
+      )}
+
       <div 
         ref={terminalRef}
         className="flex-1 overflow-y-auto scrollbar-thin scrollbar-track-gray-800 scrollbar-thumb-green-600"
