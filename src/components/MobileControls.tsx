@@ -10,7 +10,8 @@ export const MobileControls: React.FC<MobileControlsProps> = ({ onCommand }) => 
     { name: 'about', color: 'bg-blue-900' },
     { name: 'skills', color: 'bg-purple-900' },
     { name: 'projects', color: 'bg-yellow-900' },
-    { name: 'clear', color: 'bg-red-900' }
+    { name: 'clear', color: 'bg-gray-900' },
+    { name: 'restart', color: 'bg-red-900' }
   ];
 
   return (

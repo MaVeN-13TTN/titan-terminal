@@ -23,6 +23,9 @@ export class CommandHandler {
     // Game commands
     snake: () => ({ type: 'animation', component: 'snake' }),
     
+    // System commands
+    restart: () => 'RESTART_TERMINAL',
+    
     help: () => this.getHelp(),
     about: () => this.getAbout(),
     skills: () => this.getSkills(),
@@ -181,6 +184,7 @@ export class CommandHandler {
       '[green]uname[/green]       - System information',
       '[green]hostname[/green]    - Display hostname',
       '[green]clear[/green]       - Clear terminal screen',
+      '[green]restart[/green]     - Restart terminal (reload page)',
       '[green]history[/green]     - Command history',
       '[green]neofetch[/green]    - System information',
       '[green]uptime[/green]      - System uptime',

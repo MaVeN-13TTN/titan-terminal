@@ -115,6 +115,16 @@ export const Terminal = () => {
         return;
       }
       
+      if (response === 'RESTART_TERMINAL') {
+        // Show restart message then reload page
+        setHistory(prev => [...prev, { type: 'output', content: 'Restarting terminal...' }]);
+        setTimeout(() => {
+          window.location.reload();
+        }, 500);
+        setIsTyping(false);
+        return;
+      }
+      
       // Check if response is an animation
       if (typeof response === 'object' && 'type' in response && response.type === 'animation') {
         setActiveAnimation(response.component);
