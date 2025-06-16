@@ -1,17 +1,90 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Mobile responsiveness */
-@media (max-width: 640px) {
+/* Mobile-first responsive design */
+/* Base styles for mobile (default) */
+.terminal-text {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.terminal-prompt {
+  font-size: 12px;
+}
+
+/* Small devices (landscape phones, 576px and up) */
+@media (min-width: 576px) {
   .terminal-text {
-    font-size: 12px;
+    font-size: 13px;
+    line-height: 1.5;
   }
-  
+
   .terminal-prompt {
-    font-size: 12px;
+    font-size: 13px;
   }
+}
+
+/* Medium devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .terminal-text {
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .terminal-prompt {
+    font-size: 14px;
+  }
+}
+
+/* Large devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+  .terminal-text {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .terminal-prompt {
+    font-size: 16px;
+  }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+  .terminal-text {
+    font-size: 18px;
+    line-height: 1.7;
+  }
+
+  .terminal-prompt {
+    font-size: 18px;
+  }
+}
+
+/* Touch-friendly interactions */
+@media (hover: none) and (pointer: coarse) {
+  .touch-target {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  button {
+    touch-action: manipulation;
+  }
+}
+
+/* Utility classes for mobile optimization */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.safe-area-inset-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* Animations for smoother loading */
@@ -20,8 +93,12 @@
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 /* Improve scrollbar for terminal */
@@ -83,8 +160,9 @@
 
   body {
     @apply bg-black text-green-400 font-mono;
-    font-family: 'Courier New', Consolas, 'Lucida Console', Monaco, monospace;
-    overflow: hidden;
+    font-family: "Courier New", Consolas, "Lucida Console", Monaco, monospace;
+    overflow-x: auto; /* Allow horizontal scroll */
+    overflow-y: auto; /* Allow vertical scroll */
   }
 
   /* Custom scrollbar for terminal */
@@ -121,8 +199,14 @@
 
   /* Terminal cursor animation */
   @keyframes blink {
-    0%, 50% { opacity: 1; }
-    51%, 100% { opacity: 0; }
+    0%,
+    50% {
+      opacity: 1;
+    }
+    51%,
+    100% {
+      opacity: 0;
+    }
   }
 
   .cursor-blink {
@@ -147,8 +231,12 @@
 
   /* Typing animation */
   @keyframes typing {
-    from { width: 0; }
-    to { width: 100%; }
+    from {
+      width: 0;
+    }
+    to {
+      width: 100%;
+    }
   }
 
   .typing-animation {
@@ -159,8 +247,12 @@
 
   /* Matrix rain effect (optional enhancement) */
   @keyframes matrix-rain {
-    0% { transform: translateY(-100vh); }
-    100% { transform: translateY(100vh); }
+    0% {
+      transform: translateY(-100vh);
+    }
+    100% {
+      transform: translateY(100vh);
+    }
   }
 
   .matrix-char {
@@ -180,7 +272,7 @@
     body {
       font-size: 14px;
     }
-    
+
     .terminal-container {
       padding: 0.5rem;
     }
@@ -209,23 +301,23 @@
   .terminal-green {
     color: #00ff00;
   }
-  
+
   .terminal-yellow {
     color: #ffff00;
   }
-  
+
   .terminal-blue {
     color: #00ffff;
   }
-  
+
   .terminal-red {
     color: #ff0000;
   }
-  
+
   .terminal-white {
     color: #ffffff;
   }
-  
+
   .terminal-gray {
     color: #808080;
   }

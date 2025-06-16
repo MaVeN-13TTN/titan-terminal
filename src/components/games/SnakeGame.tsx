@@ -117,7 +117,7 @@ export const SnakeGame: React.FC<SnakeGameProps> = ({ onExit }) => {
     const grid = [];
     for (let y = 0; y < GRID_SIZE; y++) {
       for (let x = 0; x < GRID_SIZE; x++) {
-        let cellClass = 'w-3 h-3 border border-gray-700';
+        let cellClass = 'w-2 h-2 sm:w-3 sm:h-3 md:w-4 md:h-4 border border-gray-700';
         
         // Check if this cell contains snake
         if (snake.some(segment => segment.x === x && segment.y === y)) {
@@ -144,25 +144,31 @@ export const SnakeGame: React.FC<SnakeGameProps> = ({ onExit }) => {
   };
 
   return (
-    <div className="fixed inset-0 bg-black z-50 flex items-center justify-center p-4">
-      <div className="text-green-400 font-mono text-center">
-        <div className="text-3xl mb-4 text-yellow-400">🐍 SNAKE GAME</div>
+    <div className="fixed inset-0 bg-black z-50 flex items-center justify-center p-2 sm:p-4">
+      <div className="text-green-400 font-mono text-center max-w-full overflow-hidden">
+        <div className="text-xl sm:text-2xl md:text-3xl mb-2 sm:mb-4 text-yellow-400">🐍 SNAKE GAME</div>
         
-        <div className="mb-4">
-          <div className="text-lg">Score: <span className="text-yellow-400">{score}</span></div>
+        <div className="mb-2 sm:mb-4">
+          <div className="text-sm sm:text-base md:text-lg">Score: <span className="text-yellow-400">{score}</span></div>
         </div>
 
         {!isPlaying && !gameOver && (
-          <div className="mb-4">
+          <div className="mb-2 sm:mb-4 space-y-2">
             <button
               onClick={startGame}
-              className="bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded mr-4"
+              className="bg-green-600 hover:bg-green-700 active:bg-green-800
+                         text-white py-2 px-4 sm:px-6 rounded mr-2 sm:mr-4
+                         text-sm sm:text-base touch-manipulation
+                         transition-colors duration-150"
             >
               Start Game
             </button>
             <button
               onClick={onExit}
-              className="bg-red-600 hover:bg-red-700 text-white py-2 px-6 rounded"
+              className="bg-red-600 hover:bg-red-700 active:bg-red-800
+                         text-white py-2 px-4 sm:px-6 rounded
+                         text-sm sm:text-base touch-manipulation
+                         transition-colors duration-150"
             >
               Exit
             </button>
@@ -170,49 +176,65 @@ export const SnakeGame: React.FC<SnakeGameProps> = ({ onExit }) => {
         )}
 
         {gameOver && (
-          <div className="mb-4">
-            <div className="text-red-400 text-xl mb-2">Game Over!</div>
-            <div className="text-lg mb-4">Final Score: {score}</div>
-            <button
-              onClick={startGame}
-              className="bg-green-600 hover:bg-green-700 text-white py-2 px-6 rounded mr-4"
-            >
-              Play Again
-            </button>
-            <button
-              onClick={onExit}
-              className="bg-red-600 hover:bg-red-700 text-white py-2 px-6 rounded"
-            >
-              Exit
-            </button>
+          <div className="mb-2 sm:mb-4 space-y-2">
+            <div className="text-red-400 text-lg sm:text-xl mb-2">Game Over!</div>
+            <div className="text-sm sm:text-base md:text-lg mb-4">Final Score: {score}</div>
+            <div className="space-x-2">
+              <button
+                onClick={startGame}
+                className="bg-green-600 hover:bg-green-700 active:bg-green-800
+                           text-white py-2 px-4 sm:px-6 rounded mr-2 sm:mr-4
+                           text-sm sm:text-base touch-manipulation
+                           transition-colors duration-150"
+              >
+                Play Again
+              </button>
+              <button
+                onClick={onExit}
+                className="bg-red-600 hover:bg-red-700 active:bg-red-800
+                           text-white py-2 px-4 sm:px-6 rounded
+                           text-sm sm:text-base touch-manipulation
+                           transition-colors duration-150"
+              >
+                Exit
+              </button>
+            </div>
           </div>
         )}
 
         {isPlaying && (
-          <div className="mb-4">
-            <div className="text-sm mb-2">Use arrow keys to control the snake • Press ESC to exit</div>
+          <div className="mb-2 sm:mb-4 space-y-1 sm:space-y-2">
+            <div className="text-xs sm:text-sm mb-1 sm:mb-2">
+              Use arrow keys to control the snake • Press ESC to exit
+            </div>
             <button
               onClick={onExit}
-              className="bg-red-600 hover:bg-red-700 text-white py-1 px-4 rounded text-sm"
+              className="bg-red-600 hover:bg-red-700 active:bg-red-800
+                         text-white py-1 px-3 sm:px-4 rounded
+                         text-xs sm:text-sm touch-manipulation
+                         transition-colors duration-150"
             >
               Exit Game
             </button>
           </div>
         )}
 
-        <div className="inline-block border-2 border-green-400 p-2 mb-4">
+        <div className="inline-block border-2 border-green-400 p-1 sm:p-2 mb-2 sm:mb-4 
+                        max-w-full overflow-hidden">
           <div 
             className="grid gap-0"
             style={{ 
               gridTemplateColumns: `repeat(${GRID_SIZE}, minmax(0, 1fr))`,
-              display: 'grid'
+              display: 'grid',
+              maxWidth: '90vw',
+              maxHeight: '60vh'
             }}
           >
             {renderGrid()}
           </div>
         </div>
 
-        <div className="text-xs text-gray-400">
+        <div className="text-xs sm:text-sm text-gray-400">
           🟢 Snake • 🔴 Food • Use arrow keys to move
         </div>
       </div>

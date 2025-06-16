@@ -163,17 +163,25 @@ export const Terminal = () => {
     return 'ndungukinyanjui@portfolio:~$';
   };
 
-  // Effect for responsive font sizing and mobile controls
+  // Effect for mobile-first responsive design
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 640) {
+      // Mobile-first breakpoints
+      if (window.innerWidth < 480) {
+        // Extra small mobile devices
         setFontSize('text-xs');
         setShowMobileControls(true);
       } else if (window.innerWidth < 768) {
+        // Small tablets and large mobile devices
         setFontSize('text-sm');
         setShowMobileControls(true);
-      } else {
+      } else if (window.innerWidth < 1024) {
+        // Tablets and small laptops
         setFontSize('text-base');
+        setShowMobileControls(false);
+      } else {
+        // Desktop and large screens
+        setFontSize('text-lg');
         setShowMobileControls(false);
       }
     };
@@ -184,7 +192,10 @@ export const Terminal = () => {
   }, []);
 
   return (
-    <div className={`h-screen flex flex-col bg-black text-green-400 ${isMobile ? 'p-2' : 'p-4'} ${fontSize}`}>
+    <div className={`min-h-screen flex flex-col bg-black text-green-400 
+                     p-2 sm:p-3 md:p-4 lg:p-6 
+                     ${fontSize}
+                     font-mono leading-relaxed`}>
       <TerminalAnimations 
         activeAnimation={activeAnimation}
         onAnimationComplete={handleAnimationComplete}
@@ -212,10 +223,13 @@ export const Terminal = () => {
         isMobile={isMobile}
       />
       
-      <div className={`${isMobile ? 'text-[10px]' : 'text-xs'} text-gray-500 mt-2 mb-12`}>
+      <div className={`text-[10px] sm:text-xs md:text-sm 
+                       text-gray-500 mt-1 sm:mt-2 
+                       mb-16 sm:mb-12 md:mb-8
+                       px-1 sm:px-0`}>
         {isMobile ? 
-          'Tap twice for suggestions, swipe up/down for history' : 
-          'Use Tab for auto-completion, ↑↓ for history, Ctrl+L or \'clear\' to clear screen'}
+          'Tap twice for suggestions • Use mobile controls below' : 
+          'Tab: auto-complete • ↑↓: history • Ctrl+L/clear: clear screen'}
       </div>
 
       {showMobileControls && (

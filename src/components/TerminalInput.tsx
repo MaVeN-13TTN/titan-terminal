@@ -105,20 +105,25 @@ export const TerminalInput: React.FC<TerminalInputProps> = ({
   return (
     <>
       {suggestions.length > 0 && (
-        <div className="text-yellow-400 text-sm mb-2">
-          Suggestions: {suggestions.join('  ')}
+        <div className="text-yellow-400 text-xs sm:text-sm mb-1 sm:mb-2 
+                        px-1 sm:px-0 overflow-x-auto whitespace-nowrap">
+          <span className="text-gray-400">Suggestions: </span>
+          {suggestions.join('  ')}
         </div>
       )}
       
-      <div className={`flex items-center ${isMobile ? 'flex-wrap' : ''}`}>
-        <span className={`${isMobile ? 'text-sm' : 'mr-2'}`}>
-          <span className="text-green-400">ndungukinyanjui</span>
-          <span className="text-white">@</span>
-          <span className="text-yellow-400">portfolio</span>
-          <span className="text-white">:</span>
-          <span className="text-blue-400">~</span>
-          <span className="text-white">$ </span>
-        </span>
+      <div className="flex items-center w-full">
+        <div className="flex-shrink-0">
+          <span className="text-xs sm:text-sm md:text-base">
+            <span className="text-green-400">ndungukinyanjui</span>
+            <span className="text-white">@</span>
+            <span className="text-yellow-400">portfolio</span>
+            <span className="text-white">:</span>
+            <span className="text-blue-400">~</span>
+            <span className="text-white">$ </span>
+          </span>
+        </div>
+        
         <input
           ref={inputRef}
           type="text"
@@ -127,36 +132,21 @@ export const TerminalInput: React.FC<TerminalInputProps> = ({
           onKeyDown={handleKeyDown}
           onTouchEnd={handleTouchSuggestion}
           onDoubleClick={handleDoubleTap}
-          className={`flex-1 bg-transparent border-none outline-none text-green-400 font-mono ${isMobile ? 'text-sm' : ''}`}
+          className="flex-1 bg-transparent border-none outline-none 
+                     text-green-400 font-mono caret-green-400
+                     text-xs sm:text-sm md:text-base
+                     min-w-0 px-1 sm:px-0
+                     touch-manipulation"
           autoComplete="off"
           spellCheck="false"
-          style={isMobile ? { fontSize: '14px' } : {}}
+          autoCapitalize="none"
+          autoCorrect="off"
+          placeholder={isMobile ? "Type command..." : ""}
         />
-        <span className="text-green-400 animate-pulse">█</span>
+        
+        <span className="text-green-400 animate-pulse text-xs sm:text-sm md:text-base 
+                         flex-shrink-0 ml-1">█</span>
       </div>
-      
-      {isMobile && (
-        <div className="flex justify-center mt-2 space-x-2">
-          <button 
-            onClick={() => onCommand('help')}
-            className="bg-green-900 text-xs px-2 py-1 rounded text-green-400"
-          >
-            help
-          </button>
-          <button 
-            onClick={() => onCommand('about')}
-            className="bg-green-900 text-xs px-2 py-1 rounded text-green-400"
-          >
-            about
-          </button>
-          <button 
-            onClick={() => onCommand('skills')}
-            className="bg-green-900 text-xs px-2 py-1 rounded text-green-400"
-          >
-            skills
-          </button>
-        </div>
-      )}
     </>
   );
 };
