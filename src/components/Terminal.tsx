@@ -88,11 +88,10 @@ export const Terminal = () => {
       setCommandHistory(prev => [command, ...prev.slice(0, 49)]); // Keep last 50 commands
     }
 
-    // Handle clear command specially - reload page for authentic terminal feel
+    // Handle clear command specially - clear screen but preserve command history
     if (command.trim().toLowerCase() === 'clear') {
-      setTimeout(() => {
-        window.location.reload();
-      }, 100);
+      setHistory([]);
+      setIsTyping(false);
       return;
     }
 
@@ -110,10 +109,8 @@ export const Terminal = () => {
       
       // Handle special responses
       if (response === 'CLEAR_TERMINAL') {
-        // This shouldn't happen now since we handle clear above, but just in case
-        setTimeout(() => {
-          window.location.reload();
-        }, 100);
+        // This is now handled above in the clear command check
+        setHistory([]);
         setIsTyping(false);
         return;
       }
@@ -208,7 +205,7 @@ export const Terminal = () => {
       <div className={`${isMobile ? 'text-[10px]' : 'text-xs'} text-gray-500 mt-2 mb-12`}>
         {isMobile ? 
           'Tap twice for suggestions, swipe up/down for history' : 
-          'Use Tab for auto-completion, ↑↓ for history, Ctrl+L or \'clear\' to refresh'}
+          'Use Tab for auto-completion, ↑↓ for history, Ctrl+L or \'clear\' to clear screen'}
       </div>
 
       {showMobileControls && (

@@ -78,10 +78,8 @@ export const TerminalInput: React.FC<TerminalInputProps> = ({
       case 'l':
         if (e.ctrlKey) {
           e.preventDefault();
-          // Clear and reload page for authentic terminal feel
-          setTimeout(() => {
-            window.location.reload();
-          }, 100);
+          // Clear screen but preserve command history
+          onCommand('clear');
         }
         break;
     }

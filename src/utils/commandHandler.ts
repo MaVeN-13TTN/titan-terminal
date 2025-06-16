@@ -180,7 +180,7 @@ export class CommandHandler {
       '[green]id[/green]          - Display user and group IDs',
       '[green]uname[/green]       - System information',
       '[green]hostname[/green]    - Display hostname',
-      '[green]clear[/green]       - Clear terminal (reload)',
+      '[green]clear[/green]       - Clear terminal screen',
       '[green]history[/green]     - Command history',
       '[green]neofetch[/green]    - System information',
       '[green]uptime[/green]      - System uptime',
