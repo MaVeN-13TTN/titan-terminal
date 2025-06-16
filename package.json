@@ -1,7 +1,13 @@
 {
-  "name": "vite_react_shadcn_ts",
+  "name": "titan_terminal",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Interactive terminal-style portfolio for Ndung'u Kinyanjui",
+  "author": "Ndung'u Kinyanjui <ndungukinyanjui.dev@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ndungukinyanjui/titan_terminal"
+  },
   "type": "module",
   "scripts": {
     "dev": "vite",

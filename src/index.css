@@ -3,6 +3,45 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Mobile responsiveness */
+@media (max-width: 640px) {
+  .terminal-text {
+    font-size: 12px;
+  }
+  
+  .terminal-prompt {
+    font-size: 12px;
+  }
+}
+
+/* Animations for smoother loading */
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Improve scrollbar for terminal */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #444;
+}
+
 @layer base {
   :root {
     --background: 0 0% 0%;

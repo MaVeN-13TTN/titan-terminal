@@ -61,7 +61,14 @@ export const TerminalLine: React.FC<TerminalLineProps> = ({
     <div className="flex items-start space-x-2 leading-relaxed">
       {type === 'command' && (
         <>
-          <span className="text-green-500 flex-shrink-0">{prompt}</span>
+          <span className="flex-shrink-0">
+            <span className="text-green-400">ndungukinyanjui</span>
+            <span className="text-white">@</span>
+            <span className="text-yellow-400">portfolio</span>
+            <span className="text-white">:</span>
+            <span className="text-blue-400">~</span>
+            <span className="text-white">$ </span>
+          </span>
           <span className="text-white">{displayedContent}</span>
           {timestamp && (
             <span className="text-gray-500 text-xs ml-auto">{timestamp}</span>

@@ -1,4 +1,3 @@
-
 import React from 'react';
 
 interface TerminalInputProps {
@@ -13,6 +12,7 @@ interface TerminalInputProps {
   onCommand: (command: string) => void;
   getCurrentPrompt: () => string;
   inputRef: React.RefObject<HTMLInputElement>;
+  isMobile?: boolean;
 }
 
 export const TerminalInput: React.FC<TerminalInputProps> = ({
@@ -26,7 +26,8 @@ export const TerminalInput: React.FC<TerminalInputProps> = ({
   setHistory,
   onCommand,
   getCurrentPrompt,
-  inputRef
+  inputRef,
+  isMobile = false
 }) => {
   const handleKeyDown = (e: React.KeyboardEvent) => {
     switch (e.key) {
@@ -77,9 +78,29 @@ export const TerminalInput: React.FC<TerminalInputProps> = ({
       case 'l':
         if (e.ctrlKey) {
           e.preventDefault();
-          setHistory([]);
+          // Clear and reload page for authentic terminal feel
+          setTimeout(() => {
+            window.location.reload();
+          }, 100);
         }
         break;
+    }
+  };
+
+  // Mobile-specific touch handlers
+  const handleTouchSuggestion = () => {
+    if (suggestions.length > 0) {
+      setCurrentInput(suggestions[0]);
+      setSuggestions([]);
+    }
+  };
+
+  const handleDoubleTap = () => {
+    if (isMobile) {
+      // Show command suggestions on double tap for mobile
+      setHistory(prev => [...prev, 
+        { type: 'output', content: 'Available commands: help, about, skills, projects, certs, contact' }
+      ]);
     }
   };
 
@@ -91,20 +112,53 @@ export const TerminalInput: React.FC<TerminalInputProps> = ({
         </div>
       )}
       
-      <div className="flex items-center">
-        <span className="text-green-500 mr-2">{getCurrentPrompt()}</span>
+      <div className={`flex items-center ${isMobile ? 'flex-wrap' : ''}`}>
+        <span className={`${isMobile ? 'text-sm' : 'mr-2'}`}>
+          <span className="text-green-400">ndungukinyanjui</span>
+          <span className="text-white">@</span>
+          <span className="text-yellow-400">portfolio</span>
+          <span className="text-white">:</span>
+          <span className="text-blue-400">~</span>
+          <span className="text-white">$ </span>
+        </span>
         <input
           ref={inputRef}
           type="text"
           value={currentInput}
           onChange={(e) => setCurrentInput(e.target.value)}
           onKeyDown={handleKeyDown}
-          className="flex-1 bg-transparent border-none outline-none text-green-400 font-mono"
+          onTouchEnd={handleTouchSuggestion}
+          onDoubleClick={handleDoubleTap}
+          className={`flex-1 bg-transparent border-none outline-none text-green-400 font-mono ${isMobile ? 'text-sm' : ''}`}
           autoComplete="off"
           spellCheck="false"
+          style={isMobile ? { fontSize: '14px' } : {}}
         />
         <span className="text-green-400 animate-pulse">█</span>
       </div>
+      
+      {isMobile && (
+        <div className="flex justify-center mt-2 space-x-2">
+          <button 
+            onClick={() => onCommand('help')}
+            className="bg-green-900 text-xs px-2 py-1 rounded text-green-400"
+          >
+            help
+          </button>
+          <button 
+            onClick={() => onCommand('about')}
+            className="bg-green-900 text-xs px-2 py-1 rounded text-green-400"
+          >
+            about
+          </button>
+          <button 
+            onClick={() => onCommand('skills')}
+            className="bg-green-900 text-xs px-2 py-1 rounded text-green-400"
+          >
+            skills
+          </button>
+        </div>
+      )}
     </>
   );
 };

@@ -1,112 +1,152 @@
 
 export const portfolioData = {
   basic: {
-    name: "Alex Johnson",
-    role: "DevSecOps Engineer",
-    location: "San Francisco, CA",
-    experience: "5+ years"
+    name: "Ndung'u Kinyanjui",
+    role: "DevSecOps Engineer & AWS Certified Solutions Architect",
+    location: "Kenya 🌍",
+    experience: "BSc Computer Science (In Progress)",
+    institution: "Daystar University"
   },
   
-  summary: `Passionate DevSecOps Engineer with 5+ years of experience building secure, scalable infrastructure and implementing security-first DevOps practices. Specialized in cloud security, container orchestration, and CI/CD pipeline automation. Committed to bridging the gap between development, operations, and security teams to deliver robust, compliant applications at scale.`,
+  summary: `Hello, I'm Ndung'u Kinyanjui — a DevSecOps Engineer and AWS Certified Solutions Architect passionate about building secure, scalable, and cloud-native systems that power modern applications.
+
+I blend software engineering, cloud architecture, and security best practices to streamline infrastructure, automate deployments, and harden systems from code to cloud.
+
+Currently pursuing a Bachelor's in Computer Science at Daystar University, I focus on mentoring peers and leading community-driven learning initiatives in cybersecurity and cloud technologies.
+
+With hands-on experience in full-stack development, CI/CD pipelines, container orchestration, and cloud compliance, I strive to bridge the gap between development speed and operational security.
+
+I believe in continuous learning, purposeful engineering, and using technology to drive innovation that is not only fast — but fundamentally secure.`,
   
   skills: {
-    "DevOps Tools": [
-      "Docker", "Kubernetes", "Terraform", "Ansible", "Jenkins", 
-      "GitLab CI/CD", "GitHub Actions", "ArgoCD", "Helm"
+    "☁️ Cloud Platforms & Services": [
+      "AWS (EC2, S3, VPC, IAM, Lambda, Route 53, CloudWatch, CloudTrail)",
+      "Serverless (API Gateway, DynamoDB, SQS, Step Functions)",
+      "AWS CLI & SDK",
+      "AWS Well-Architected Framework"
     ],
-    "Security Tools": [
-      "SAST/DAST", "SonarQube", "Snyk", "Aqua Security", "Falco",
-      "Vault", "CyberArk", "Nessus", "Wireshark", "Metasploit"
+    "⚙️ DevOps & CI/CD": [
+      "GitHub Actions, GitLab CI/CD, CircleCI",
+      "Docker (multi-stage builds, container optimization)",
+      "Kubernetes (EKS, Helm, Kustomize)",
+      "Infrastructure as Code (Terraform, AWS CloudFormation)",
+      "Monitoring & Logging (Prometheus, Grafana, ELK Stack)",
+      "Secrets management (AWS Secrets Manager, HashiCorp Vault)"
     ],
-    "Cloud Platforms": [
-      "AWS", "Azure", "GCP", "CloudFormation", "ARM Templates",
-      "Cloud Security Center", "AWS Config", "Azure Sentinel"
+    "🔐 Security & DevSecOps": [
+      "Static & Dynamic Analysis (Trivy, SonarQube)",
+      "Dependency scanning (OWASP Dependency-Check, Snyk)",
+      "Container security & scanning",
+      "IAM policy writing & least privilege design",
+      "Compliance standards (CIS, NIST, ISO 27001 basics)"
     ],
-    "Programming & Scripting": [
-      "Python", "Bash", "PowerShell", "Go", "YAML", "JSON",
-      "JavaScript", "SQL", "HCL"
+    "👨‍💻 Programming & Scripting": [
+      "Python (scripts, automation, Flask/Django)",
+      "JavaScript (ES6+), TypeScript",
+      "Bash/Shell scripting",
+      "Java (Spring Boot basics)",
+      "SQL, NoSQL (MongoDB, DynamoDB)"
     ],
-    "Monitoring & Logging": [
-      "Prometheus", "Grafana", "ELK Stack", "Splunk", "DataDog",
-      "New Relic", "CloudWatch", "Azure Monitor"
+    "🌐 Web Development": [
+      "React.js, Next.js, Tailwind CSS",
+      "HTML5, CSS3, Node.js, Express.js",
+      "REST APIs & basic GraphQL"
     ],
-    "Compliance & Frameworks": [
-      "SOC 2", "ISO 27001", "NIST", "CIS Controls", "GDPR",
-      "HIPAA", "PCI DSS", "OWASP Top 10"
+    "🔧 Tools & Platforms": [
+      "Git & GitHub (branching strategy, PR workflows)",
+      "Linux (Ubuntu, Kali)",
+      "VS Code, Postman",
+      "Nmap, Wireshark, Burp Suite",
+      "GDB, Ghidra, Autopsy (for CTF work)"
+    ],
+    "🧠 Cognitive & Problem-Solving": [
+      "Critical thinking and root cause analysis",
+      "Threat modeling mindset",
+      "Continuous learning and technical curiosity",
+      "Systems thinking"
+    ],
+    "🗣️ Communication & Collaboration": [
+      "Technical documentation (Markdown, README writing)",
+      "Effective communication across technical and non-technical teams",
+      "Comfortable leading technical workshops and presentations"
+    ],
+    "🧩 Team & Culture": [
+      "Agile methodology and Scrum familiarity",
+      "Mentoring and peer support",
+      "Feedback-driven development"
+    ],
+    "🎯 Work Ethic & Growth": [
+      "Ownership mindset",
+      "Self-motivated and proactive",
+      "Ability to handle high-pressure environments (e.g., during incidents)",
+      "Passion for building secure and scalable systems"
     ]
   },
   
   projects: [
     {
-      name: "SecureCI/CD Pipeline",
-      description: "Built an enterprise-grade CI/CD pipeline with integrated security scanning, automated compliance checks, and zero-downtime deployments. Reduced security vulnerabilities by 85% and deployment time by 60%.",
-      techStack: ["Jenkins", "SonarQube", "Docker", "Kubernetes", "Terraform", "AWS"],
-      github: "https://github.com/alexjohnson/secure-cicd",
-      demo: "https://demo-secure-pipeline.com"
+      name: "SecureDevOps Pipeline",
+      description: "End-to-end CI/CD pipeline integrating SAST, secrets detection, and Docker image scanning.",
+      techStack: ["GitHub Actions", "Trivy", "Semgrep", "Docker", "Python API"],
+      github: "https://github.com/ndungukinyanjui/devsecops-pipeline"
     },
     {
-      name: "Cloud Security Automation",
-      description: "Developed automated security compliance monitoring for multi-cloud environments. Implements CIS benchmarks, automated remediation, and real-time alerting for security violations.",
-      techStack: ["Python", "AWS Config", "Azure Policy", "Terraform", "Lambda"],
-      github: "https://github.com/alexjohnson/cloud-security-automation"
+      name: "AWS Serverless Portfolio",
+      description: "Personal portfolio built with a serverless backend.",
+      techStack: ["S3", "Lambda", "API Gateway", "DynamoDB", "React"],
+      github: "https://github.com/ndungukinyanjui/aws-portfolio"
     },
     {
-      name: "Container Security Platform",
-      description: "Created a comprehensive container security solution with vulnerability scanning, runtime protection, and compliance monitoring. Supports Kubernetes and Docker environments.",
-      techStack: ["Go", "Kubernetes", "Falco", "Aqua", "Prometheus", "Grafana"],
-      github: "https://github.com/alexjohnson/container-security-platform"
+      name: "CloudGuard Dashboard",
+      description: "Compliance monitoring dashboard for AWS environments.",
+      techStack: ["React", "Flask", "AWS SDK", "IAM"],
+      github: "https://github.com/ndungukinyanjui/cloudguard"
     },
     {
-      name: "Infrastructure as Code (IaC) Security",
-      description: "Developed security-first IaC templates and policies for AWS, Azure, and GCP. Includes automated security validation and policy-as-code implementation.",
-      techStack: ["Terraform", "CloudFormation", "Ansible", "Open Policy Agent", "Git"],
-      github: "https://github.com/alexjohnson/secure-iac-templates"
+      name: "CyberCTF Toolkit",
+      description: "A collection of custom scripts and tools for CTFs (Capture the Flag) in cybersecurity.",
+      techStack: ["Python", "Bash"],
+      github: "https://github.com/ndungukinyanjui/cyberctf-toolkit"
     }
   ],
   
   certifications: [
     {
-      name: "AWS Certified Security - Specialty",
+      name: "AWS Certified Solutions Architect – Associate (SAA-C03)",
       issuer: "Amazon Web Services",
-      date: "2023",
-      validUntil: "2026"
-    },
-    {
-      name: "Certified Kubernetes Security Specialist (CKS)",
-      issuer: "Cloud Native Computing Foundation",
-      date: "2023",
-      validUntil: "2026"
-    },
-    {
-      name: "CompTIA Security+",
-      issuer: "CompTIA",
-      date: "2022",
-      validUntil: "2025"
-    },
-    {
-      name: "Azure Security Engineer Associate",
-      issuer: "Microsoft",
-      date: "2023",
-      validUntil: "2025"
-    },
-    {
-      name: "Certified Information Systems Security Professional (CISSP)",
-      issuer: "ISC2",
       date: "2024",
       validUntil: "2027"
     },
     {
-      name: "HashiCorp Certified: Terraform Associate",
-      issuer: "HashiCorp",
-      date: "2023",
-      validUntil: "2025"
+      name: "AWS Certified Cloud Practitioner",
+      issuer: "Amazon Web Services", 
+      date: "2024",
+      validUntil: "2027"
+    },
+    {
+      name: "GitHub Foundations Certification",
+      issuer: "GitHub",
+      date: "2024",
+      validUntil: "2026"
+    },
+    {
+      name: "SolaviseTech AWS & DevOps Internship Graduate",
+      issuer: "SolaviseTech",
+      date: "2024",
+      validUntil: "N/A"
+    },
+    {
+      name: "Google Professional Cybersecurity Certificate (In Progress)",
+      issuer: "Google",
+      date: "2025",
+      validUntil: "TBD"
     }
   ],
   
   contact: {
-    email: "alex.johnson@devsecops.dev",
-    linkedin: "https://linkedin.com/in/alexjohnson-devsecops",
-    github: "https://github.com/alexjohnson",
-    website: "https://alexjohnson.dev"
+    email: "ndungukinyanjui.dev@gmail.com",
+    linkedin: "https://linkedin.com/in/ndungukinyanjui", 
+    github: "https://github.com/ndungukinyanjui",
+    website: "https://ndungukinyanjui.dev"
   }
 };
